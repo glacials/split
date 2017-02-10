@@ -31,7 +31,8 @@ func main() {
 					Text:    "meow",
 				})
 		}(m)}
-		if m.Type=="message" && m.Text == "hello"{
+
+		if m.Type=="message" && strings.Contains(m.Text,"hello") && strings.HasPrefix(m.Text, "<@"+id+">"){
 			go func(m Message) {				
 				postMessage(ws, Message{
 					Type:    m.Type,
