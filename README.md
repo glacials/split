@@ -2,6 +2,8 @@
 
 A Slack chat bot that meows.
 
+![](http://i.imgur.com/bn5b8U9.jpg)
+
 ### Running
 
 #### Prerequisites
