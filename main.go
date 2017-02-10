@@ -30,7 +30,15 @@ func main() {
 					Channel: m.Channel,
 					Text:    "meow",
 				})
-			}(m)
-		}
+		}(m)}
+			if m.Type=="message" && m == "hello"{
+			go func(m Message) {
+				postMessage(ws, Message{
+					Type:    m.Type,
+					Channel: m.Channel,
+					Text:    "hello",
+				})
+			}(m)}
+		
 	}
 }
