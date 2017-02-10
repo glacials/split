@@ -7,8 +7,15 @@ A Slack chat bot that meows.
 #### Prerequisites
 - Go 1.7
 
-#### First run
+#### Setting up
 ```sh
-go get github.com/glacials/split
-split <slack oauth token>
+make setup
+cp config.json.example config.json # then fill in SlackToken
 ```
+
+#### Running
+```sh
+make
+```
+
+Split will automatically restart whenever a Go file is changed.

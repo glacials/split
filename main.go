@@ -1,19 +1,32 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
 	"log"
 	"os"
 	"strings"
 )
 
+type Conf struct {
+	SlackToken string
+}
+
 func main() {
-	if len(os.Args) != 2 {
-		fmt.Fprintf(os.Stderr, "usage: splitbot slack-bot-token\n")
-		os.Exit(1)
+	log.Print("split: ready to meow")
+
+	f, err := os.Open("config.json")
+	if err != nil {
+		log.Fatal("can't open config file")
+		return
 	}
 
-	ws, id := slackConnect(os.Args[1])
+	d := json.NewDecoder(f)
+	var c Conf
+	if err := d.Decode(&c); err != nil {
+		log.Fatal("can't decode config file")
+	}
+
+	ws, id := slackConnect(c.SlackToken)
 
 	for {
 		m, err := getMessage(ws)
