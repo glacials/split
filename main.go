@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -45,6 +46,7 @@ func main() {
 			// 		Text:    "meow",
 			// 	})
 			// }(m)
+
 			//split say hello
 			if strings.Contains(m.Text, "hello") {
 				go func(m Message) {
@@ -61,7 +63,17 @@ func main() {
 					postMessage(ws, Message{
 						Type:    m.Type,
 						Channel: m.Channel,
-						Text:    "Ben, WFH!",
+						Text:    "Ben: Split's dad, Yuting's pillow, and a guy who WFH forever!",
+					})
+				}(m)
+			}
+
+			if strings.Contains(m.Text, "yuting") || strings.Contains(m.Text, "Yuting") {
+				go func(m Message) {
+					postMessage(ws, Message{
+						Type:    m.Type,
+						Channel: m.Channel,
+						Text:    "I miss her sooooooo much! She is my BFF XOXO",
 					})
 				}(m)
 			}
@@ -76,21 +88,28 @@ func main() {
 					})
 				}(m)
 			}
+
 			//split do math
 			if strings.Contains(m.Text, "+") {
 				go func(m Message) {
-					words := strings.Split(m.Text, "+")
-					var num1 = words[1]
-					var num2 = words[1]
-					var num = num1 + num2
+					words := strings.Fields(m.Text)
+					nums := strings.Split(words[1], "+")
+					num1, err := strconv.Atoi(nums[0])
+					num2, err := strconv.Atoi(nums[1])
+					total := num1 + num2
+					if err != nil {
+						log.Println("Not a number")
+					}
+
 					postMessage(ws, Message{
 						Type:    m.Type,
 						Channel: m.Channel,
-						Text:    "I'm smart, the answer is : " + num,
+						Text:    "I'm smart, the answer is : " + strconv.Itoa(total),
 					})
 				}(m)
 			}
 
+			//split repeat
 			if strings.Contains(m.Text, "repeat") {
 				go func(m Message) {
 					words := strings.Fields(m.Text)
