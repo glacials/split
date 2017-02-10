@@ -76,6 +76,32 @@ func main() {
 					})
 				}(m)
 			}
+			//split do math
+			if strings.Contains(m.Text, "+") {
+				go func(m Message) {
+					words := strings.Split(m.Text, "+")
+					var num1 = words[1]
+					var num2 = words[1]
+					var num = num1 + num2
+					postMessage(ws, Message{
+						Type:    m.Type,
+						Channel: m.Channel,
+						Text:    "I'm smart, the answer is : " + num,
+					})
+				}(m)
+			}
+
+			if strings.Contains(m.Text, "repeat") {
+				go func(m Message) {
+					words := strings.Fields(m.Text)
+					var repeatWords = words[2]
+					postMessage(ws, Message{
+						Type:    m.Type,
+						Channel: m.Channel,
+						Text:    repeatWords,
+					})
+				}(m)
+			}
 		}
 	}
 }
