@@ -31,14 +31,14 @@ func main() {
 					Text:    "meow",
 				})
 		}(m)}
-			if m.Type=="message" && m == "hello"{
-			go func(m Message) {
+		if m.Type=="message" && m.Text == "hello"{
+			go func(m Message) {				
 				postMessage(ws, Message{
 					Type:    m.Type,
 					Channel: m.Channel,
 					Text:    "hello",
 				})
-			}(m)}
+		}(m)}
 		
 	}
 }
