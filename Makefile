@@ -1,5 +1,5 @@
 watch:
-	reflex -r '\.go' make run
+	reflex -sr '\.go' make run
 
 setup:
 	go get github.com/cespare/reflex
