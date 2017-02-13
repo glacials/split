@@ -121,6 +121,22 @@ func main() {
 					})
 				}(m)
 			}
+
+			//miss u
+			if strings.Contains(m.Text, "see you soon") {
+				go func(m Message) {
+					t, err := time.Parse("2006-01-02 15:04:05", "2017-02-17 16:22:00")
+					var inTime = t.Sub(time.Now())
+					var timeDuration = inTime.String()
+					if err != nil {
+					}
+					postMessage(ws, Message{
+						Type:    m.Type,
+						Channel: m.Channel,
+						Text:    "Yuting will see Ben in: " + timeDuration,
+					})
+				}(m)
+			}
 		}
 	}
 }
